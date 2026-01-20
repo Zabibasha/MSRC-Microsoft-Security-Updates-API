@@ -6,10 +6,10 @@ This is a **PowerShell module** (v1.9.9) for accessing Microsoft Security Respon
 ## Architecture & Key Patterns
 
 ### Module Structure
-- **Root**: [MsrcSecurityUpdates.psm1](src/MsrcSecurityUpdates/MsrcSecurityUpdates.psm1) - dot-sources all Public and Private functions
+- **Root**: [MsrcSecurityUpdates.psm1](../src/MsrcSecurityUpdates/MsrcSecurityUpdates.psm1) - dot-sources all Public and Private functions
 - **Public/**: User-facing cmdlets that export via `Export-ModuleMember`
 - **Private/**: Internal helper functions not exposed to module consumers
-- **Manifest**: [MsrcSecurityUpdates.psd1](src/MsrcSecurityUpdates/MsrcSecurityUpdates.psd1) - PowerShell v5.1+ required
+- **Manifest**: [MsrcSecurityUpdates.psd1](../src/MsrcSecurityUpdates/MsrcSecurityUpdates.psd1) - PowerShell v5.1+ required
 
 ### Global Variables Pattern
 The module uses **shared global variables** initialized by `Set-GlobalVariables.ps1`:
@@ -23,7 +23,7 @@ These globals are set at module load and can be reconfigured via `Set-MSRCApiKey
 - No API key required for public endpoints
 - Uses REST method with dynamic Accept headers (JSON/XML)
 - All functions fetch from `https://api.msrc.microsoft.com/cvrf/` endpoints
-- **See**: [Get-MsrcCvrfDocument.ps1](src/MsrcSecurityUpdates/Public/Get-MsrcCvrfDocument.ps1) for REST pattern
+- **See**: [Get-MsrcCvrfDocument.ps1](../src/MsrcSecurityUpdates/Public/Get-MsrcCvrfDocument.ps1) for REST pattern
 
 ### Dynamic Parameters Pattern
 Functions like `Get-MsrcCvrfDocument` use **DynamicParam** blocks to:
@@ -34,7 +34,7 @@ Functions like `Get-MsrcCvrfDocument` use **DynamicParam** blocks to:
 ## Key Workflows
 
 ### Testing
-- **File**: [MsrcSecurityUpdates.tests.ps1](src/MsrcSecurityUpdates/MsrcSecurityUpdates.tests.ps1)
+- **File**: [MsrcSecurityUpdates.tests.ps1](../src/MsrcSecurityUpdates/MsrcSecurityUpdates.tests.ps1)
 - Tests use **Pester framework** (DescribeIt-Based)
 - Tests dynamically call both API v2.0 and v3.0 to verify compatibility
 - Run via: `Invoke-Pester MsrcSecurityUpdates.tests.ps1`
@@ -62,8 +62,8 @@ Functions like `Get-MsrcCvrfDocument` use **DynamicParam** blocks to:
 - JSON/XML parsing handled transparently via Accept headers
 
 ### JSON Data Files
-- [CVSS-Descriptions.json](src/MsrcSecurityUpdates/Public/CVSS-Descriptions.json) - Metadata for CVSS severity levels
-- [CVSS-Metrics.json](src/MsrcSecurityUpdates/Public/CVSS-Metrics.json) - CVSS scoring reference
+- [CVSS-Descriptions.json](../src/MsrcSecurityUpdates/Public/CVSS-Descriptions.json) - Metadata for CVSS severity levels
+- [CVSS-Metrics.json](../src/MsrcSecurityUpdates/Public/CVSS-Metrics.json) - CVSS scoring reference
 - Used by functions that generate HTML reports
 
 ## Integration Points
